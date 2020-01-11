@@ -1,0 +1,82 @@
+<div class="row auto">
+    <div class="col-md-12  auto">
+            <h1> <u> User Registration </u></h1>
+        <form [formGroup]='formModel' autocomplete="on" (submit)="OnSubmit()">
+            <div class="form-group required">
+                <label for="">UserName</label>
+                <input type="text" class="form-control" formControlName="UserName">
+                <label class="text-danger" *ngIf="formModel.get('UserName').touched && formModel.get('UserName').errors?.required">This field is mandatory.</label>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                        <div class="form-group required">
+                                <label for="">Email</label>
+                                <input type="text" class="form-control" formControlName="Email">
+                                <label class="text-danger" *ngIf="formModel.get('Email').touched && formModel.get('Email').errors?.email">Invalid email address.</label>
+                            </div>
+                </div>
+                <div class="col-md-6">
+                        <div class="form-group required">
+                                <label for="">Phone</label>
+                                <input type="text" class="form-control" formControlName="Phone">
+                                <label class="text-danger" *ngIf="formModel.get('Phone').touched && formModel.get('Phone').errors?.required">This field is mandatory.</label>
+                                <label class="text-danger" *ngIf="formModel.get('Phone').touched && formModel.get('Phone').errors?.minlength">10 Numbers required.</label>
+                         </div>
+                </div>
+            </div>
+            
+            
+            <h3>Current Address:</h3>
+            <div class="row" formGroupName="CurrentAddress">
+                <div class="col-md-12">
+                    <div class="form-group required">
+                        <label for="">Address Line 1</label>
+                        <input type="text" class="form-control" formControlName="AddressLine1">
+                        <label class="text-danger" *ngIf="formModel.get('CurrentAddress.AddressLine1').touched && formModel.get('CurrentAddress.AddressLine1').errors?.required">This field is mandatory.</label>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                        <div class="form-group required">
+                            <label for="">Address Line 2</label>
+                            <input type="text" class="form-control" formControlName="AddressLine2">
+                            <label class="text-danger" *ngIf="formModel.get('CurrentAddress.AddressLine2').touched && formModel.get('CurrentAddress.AddressLine2').errors?.required">This field is mandatory.</label>
+                        </div>
+                </div>
+                <div class="col-md-6">
+                        <div class="form-group required">
+                            <label for="">City</label>
+                            <input type="text" class="form-control" formControlName="City">
+                            <label class="text-danger" *ngIf="formModel.get('CurrentAddress.City').touched && formModel.get('CurrentAddress.City').errors?.required">This field is mandatory.</label>
+                        </div>
+                </div>
+                <div class="col-md-6">
+                        <div class="form-group required">
+                            <label for="">Zip</label>
+                            <input type="text" class="form-control" formControlName="Zip">
+                            <label class="text-danger" *ngIf="formModel.get('CurrentAddress.Zip').touched && formModel.get('CurrentAddress.Zip').errors?.required">This field is mandatory.</label>
+                            <label class="text-danger" *ngIf="formModel.get('CurrentAddress.Zip').touched && formModel.get('CurrentAddress.Zip').errors?.minlength">6 Digit Zip required.</label>
+                        </div>
+                </div>
+                <div class="col-md-6">
+                        <div class="form-group required">
+                            <label for="">State</label>
+                            <input type="text" class="form-control" formControlName="State">
+                            <label class="text-danger" *ngIf="formModel.get('CurrentAddress.State').touched && formModel.get('CurrentAddress.State').errors?.required">This field is mandatory.</label>
+                        </div>
+                </div> 
+                <div class="col-md-6">
+                        <div class="form-group required">
+                            <label for="">Country</label>
+                            <input type="text" class="form-control" formControlName="Country">
+                        </div>
+                </div>    
+            </div>
+            <div class="form-row">
+                    <div class="form-group col-md-8 offset-md-2">
+                      <button type="submit" class="btn btn-lg btn-block" [disabled]="!formModel.valid">Sign Up</button>
+                    </div>
+                  </div>
+            
+        </form>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="card" style="width:400px">
+    <img src="" alt="User Image">
+    <div class="card-body">
+        <h4 class="card-title">Welcome {{bodyProfile.UserName}}</h4>
+        <p class="card-text">Email: {{bodyProfile.Email}}</p>
+        <p class="card-text">Phone: +91-{{bodyProfile.Phone}}</p>
+    </div>
+    <div class="card-body">
+            <h5>Current Address:</h5>
+            <p class="card-text">{{bodyProfile.AddressLine1}},{{bodyProfile.AddressLine2}}</p>
+            <p class="card-text">Zip-{{bodyProfile.Zip}},{{bodyProfile.City}}</p>
+            <p class="card-text">{{bodyProfile.State}},{{bodyProfile.Country}}</p>
+        </div>
+</div>
