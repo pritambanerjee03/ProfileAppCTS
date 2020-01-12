@@ -10,10 +10,14 @@ export class HomeComponent implements OnInit {
   constructor(private service:ServiceService) { }
 
   bodyProfile:any;
+  groups:any=[]
   ngOnInit() {
     this.bodyProfile=this.service.getBody();
     console.log('lol profile home')
     console.log(JSON.stringify(this.bodyProfile))
+    this.groups =this.bodyProfile.Addresses
+    console.log('lol profile home groups')
+    console.log(JSON.stringify(this.groups))
   }
 
   

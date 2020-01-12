@@ -9,14 +9,21 @@ body{
     color: black;
     font-weight: bold;
 }
-input.form-control,input.form-control:focus{
+input.form-control,input.form-control:focus,input.form-control:disabled{
     background-color: darkseagreen;
     color: black;
     border-color: black;
     border-radius: 0px;
     border-width: 2px;
 }
-
+select.form-control,select.form-control:focus
+{
+    background-color: darkseagreen;
+    color: black;
+    border-color: black;
+    border-radius: 0px;
+    border-width: 2px; 
+}
 input.form-control:focus{
     box-shadow: none;
     border-bottom-color: black;

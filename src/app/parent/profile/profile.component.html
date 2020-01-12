@@ -1,17 +1,20 @@
 <div class="row auto">
     <div class="col-md-12  auto">
             <h1> <u> User Registration </u></h1>
-        <form [formGroup]='formModel' autocomplete="on" (submit)="OnSubmit()">
+            
+        <form [formGroup]="formModel" autocomplete="on" (submit)="OnSubmit()">
             <div class="form-group required">
                 <label for="">UserName</label>
                 <input type="text" class="form-control" formControlName="UserName">
                 <label class="text-danger" *ngIf="formModel.get('UserName').touched && formModel.get('UserName').errors?.required">This field is mandatory.</label>
+                <label class="text-danger" *ngIf="formModel.get('UserName').touched && formModel.get('UserName').errors?.minlength">Value should be minimum 5 Characters.</label>
             </div>
             <div class="row">
                 <div class="col-md-6">
                         <div class="form-group required">
                                 <label for="">Email</label>
                                 <input type="text" class="form-control" formControlName="Email">
+                                <label class="text-danger" *ngIf="formModel.get('Email').touched && formModel.get('Email').errors?.required">This field is mandatory.</label>
                                 <label class="text-danger" *ngIf="formModel.get('Email').touched && formModel.get('Email').errors?.email">Invalid email address.</label>
                             </div>
                 </div>
@@ -20,63 +23,84 @@
                                 <label for="">Phone</label>
                                 <input type="text" class="form-control" formControlName="Phone">
                                 <label class="text-danger" *ngIf="formModel.get('Phone').touched && formModel.get('Phone').errors?.required">This field is mandatory.</label>
-                                <label class="text-danger" *ngIf="formModel.get('Phone').touched && formModel.get('Phone').errors?.minlength">10 Numbers required.</label>
+                                <label class="text-danger" *ngIf="formModel.get('Phone').touched && formModel.get('Phone').errors?.pattern">Value should be 10 digit number.</label>
                          </div>
                 </div>
             </div>
             
-            
-            <h3>Current Address:</h3>
-            <div class="row" formGroupName="CurrentAddress">
-                <div class="col-md-12">
-                    <div class="form-group required">
-                        <label for="">Address Line 1</label>
-                        <input type="text" class="form-control" formControlName="AddressLine1">
-                        <label class="text-danger" *ngIf="formModel.get('CurrentAddress.AddressLine1').touched && formModel.get('CurrentAddress.AddressLine1').errors?.required">This field is mandatory.</label>
-                    </div>
+            <div class="row" formArrayName="Addresses">
+            <div class="col-12" *ngFor="let group of addressArray.controls; let i = index;" [formGroupName]="i">
+                <div class="row">
+                        <div class="col-12">
+                                <div class="row">
+                                <div class="col-8">
+                                    <h4>Address {{i+1}}</h4>
+                                </div>
+                                <div class="col-4 control-buttons">
+                                    <img src="/assets/add.svg" alt="" width="24" height="24"  (click)="addAddress()">
+                                    <img src="/assets/remove.svg" alt="" width="24" height="24" (click)="removeAddress(i)">
+                                </div>
+                                </div>
+                                <hr>
+                            </div>
+                            <!-- <div class="col-12" style="margin-bottom: 1rem;">
+                                    <div class="form-check">
+                                      <input class="form-check-input" formControlName="primaryFlg" type="checkbox" value="" id="defaultCheck1">
+                                      <label class="form-check-label" for="defaultCheck1">
+                                        Is Primary Address
+                                      </label>
+                                    </div>
+                            </div> -->
+                                <div class="col-md-12">
+                                    <div class="form-group required">
+                                        <label for="">Address Line</label>
+                                        <input type="text" class="form-control" formControlName="AddressLine">
+                                        <label class="text-danger" *ngIf="group.controls.AddressLine.touched && group.controls.AddressLine.errors?.required">This field is mandatory.</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                        <div class="form-group required">
+                                            <label for="">City</label>
+                                            <input type="text" class="form-control" formControlName="City">
+                                            <label class="text-danger" *ngIf="group.controls.City.touched && group.controls.City.errors?.required">This field is mandatory.</label>
+                                        </div>
+                                </div>
+                                <div class="col-md-6">
+                                        <div class="form-group required">
+                                            <label for="">Zip</label>
+                                            <input type="text" class="form-control" formControlName="Zip">
+                                            <label class="text-danger" *ngIf="group.controls.Zip.touched && group.controls.Zip.errors?.required">This field is mandatory.</label>
+                                            <label class="text-danger" *ngIf="group.controls.Zip.touched && group.controls.Zip.errors?.pattern">Value should be 6 digit number.</label>
+                                        </div>
+                                </div>
+                                <div class="col-md-6">
+                                        <div class="form-group required">
+                                            <label for="">State</label>
+                                            <select class="form-control" formControlName="State">
+                                                <option selected [ngValue]="null">Choose...</option>
+                                                <option *ngFor="let item of states" [value]="item">{{item}}</option>
+                                            </select>
+                                            <label class="text-danger" *ngIf="group.controls.State.touched && group.controls.State.errors?.required">This field is mandatory.</label>
+                                        </div>
+                                </div> 
+                                <div class="col-md-6">
+                                        <div class="form-group required">
+                                            <label for="">Country</label>
+                                            <input type="text" class="form-control" formControlName="Country" disabled>
+                                            <label class="text-danger" *ngIf="group.controls.Country.touched && group.controls.Country.errors?.required">This field is mandatory.</label>
+                                        </div>
+                                </div>    
                 </div>
-                <div class="col-md-12">
-                        <div class="form-group required">
-                            <label for="">Address Line 2</label>
-                            <input type="text" class="form-control" formControlName="AddressLine2">
-                            <label class="text-danger" *ngIf="formModel.get('CurrentAddress.AddressLine2').touched && formModel.get('CurrentAddress.AddressLine2').errors?.required">This field is mandatory.</label>
-                        </div>
-                </div>
-                <div class="col-md-6">
-                        <div class="form-group required">
-                            <label for="">City</label>
-                            <input type="text" class="form-control" formControlName="City">
-                            <label class="text-danger" *ngIf="formModel.get('CurrentAddress.City').touched && formModel.get('CurrentAddress.City').errors?.required">This field is mandatory.</label>
-                        </div>
-                </div>
-                <div class="col-md-6">
-                        <div class="form-group required">
-                            <label for="">Zip</label>
-                            <input type="text" class="form-control" formControlName="Zip">
-                            <label class="text-danger" *ngIf="formModel.get('CurrentAddress.Zip').touched && formModel.get('CurrentAddress.Zip').errors?.required">This field is mandatory.</label>
-                            <label class="text-danger" *ngIf="formModel.get('CurrentAddress.Zip').touched && formModel.get('CurrentAddress.Zip').errors?.minlength">6 Digit Zip required.</label>
-                        </div>
-                </div>
-                <div class="col-md-6">
-                        <div class="form-group required">
-                            <label for="">State</label>
-                            <input type="text" class="form-control" formControlName="State">
-                            <label class="text-danger" *ngIf="formModel.get('CurrentAddress.State').touched && formModel.get('CurrentAddress.State').errors?.required">This field is mandatory.</label>
-                        </div>
-                </div> 
-                <div class="col-md-6">
-                        <div class="form-group required">
-                            <label for="">Country</label>
-                            <input type="text" class="form-control" formControlName="Country">
-                        </div>
-                </div>    
             </div>
+            </div>
+            
             <div class="form-row">
                     <div class="form-group col-md-8 offset-md-2">
                       <button type="submit" class="btn btn-lg btn-block" [disabled]="!formModel.valid">Sign Up</button>
                     </div>
-                  </div>
+             </div>
             
         </form>
+        {{formModel.value | json}}
     </div>
 </div>

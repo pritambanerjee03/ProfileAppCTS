@@ -4,11 +4,13 @@
         <h4 class="card-title">Welcome {{bodyProfile.UserName}}</h4>
         <p class="card-text">Email: {{bodyProfile.Email}}</p>
         <p class="card-text">Phone: +91-{{bodyProfile.Phone}}</p>
-    </div>
-    <div class="card-body">
-            <h5>Current Address:</h5>
-            <p class="card-text">{{bodyProfile.AddressLine1}},{{bodyProfile.AddressLine2}}</p>
-            <p class="card-text">Zip-{{bodyProfile.Zip}},{{bodyProfile.City}}</p>
-            <p class="card-text">{{bodyProfile.State}},{{bodyProfile.Country}}</p>
-        </div>
+    </div>  
 </div>
+ <div class="card" style="width:400px"  *ngFor="let group of groups">
+        <div class="card-body" *ngFor="let item of group">
+                <h4 class="card-title">Address:</h4>
+                <p class="card-text">{{item.AddressLine}}</p>
+                <p class="card-text">Zip-{{item.Zip}},{{item.City}}</p>
+                <p class="card-text">{{item.State}},{{item.Country}}</p>
+        </div>
+</div> 
