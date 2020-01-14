@@ -1,16 +1,15 @@
-<div class="card" style="width:400px">
-    <img src="" alt="User Image">
+<div class="card" style="width:300px">
+    <img src="../../assets/img_avatar.png" width="300" height="250" alt="User Image">
     <div class="card-body">
         <h4 class="card-title">Welcome {{bodyProfile.UserName}}</h4>
         <p class="card-text">Email: {{bodyProfile.Email}}</p>
         <p class="card-text">Phone: +91-{{bodyProfile.Phone}}</p>
-    </div>  
+    </div>
+    <div class="card-body" *ngFor="let item of groups">
+            <h4 class="card-title">Address:</h4>
+            <p class="card-text">{{item.AddressLine}}</p>
+            <p class="card-text">Zip-{{item.Zip}},{{item.City}}</p>
+            <p class="card-text">{{item.State}},{{item.Country}}</p>
+    </div>
 </div>
- <div class="card" style="width:400px"  *ngFor="let group of groups">
-        <div class="card-body" *ngFor="let item of group">
-                <h4 class="card-title">Address:</h4>
-                <p class="card-text">{{item.AddressLine}}</p>
-                <p class="card-text">Zip-{{item.Zip}},{{item.City}}</p>
-                <p class="card-text">{{item.State}},{{item.Country}}</p>
-        </div>
-</div> 
+ 
